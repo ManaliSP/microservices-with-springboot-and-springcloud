@@ -9,13 +9,13 @@ import java.util.List;
 @RestController
 public class StaticFilteringController {
 
-    @GetMapping("/filtering")
-    public StaticFilteringBean filtering(){
+    @GetMapping("/static-filtering")
+    public StaticFilteringBean staticfiltering(){
         return new StaticFilteringBean("value1", "value2", "value3");
     }
 
-    @GetMapping("/filtering-list")
-    public List<StaticFilteringBean> filteringList(){
+    @GetMapping("/static-filtering-list")
+    public List<StaticFilteringBean> staticFilteringList(){
         return Arrays.asList(new StaticFilteringBean("value1", "value2", "value3"),
                 new StaticFilteringBean("value4", "value5", "value6"));
     }
