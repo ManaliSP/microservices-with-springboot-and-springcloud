@@ -1,10 +1,9 @@
 package com.spring.rest.webservices.restfulwebservices.filtering;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 //@JsonIgnoreProperties({"field1", "field2"})
-public class SomeBean {
+public class StaticFilteringBean {
 
     private String field1;
 
@@ -13,7 +12,7 @@ public class SomeBean {
     @JsonIgnore
     private String field3;
 
-    public SomeBean(String field1, String field2, String field3) {
+    public StaticFilteringBean(String field1, String field2, String field3) {
         super();
         this.field1 = field1;
         this.field2 = field2;
