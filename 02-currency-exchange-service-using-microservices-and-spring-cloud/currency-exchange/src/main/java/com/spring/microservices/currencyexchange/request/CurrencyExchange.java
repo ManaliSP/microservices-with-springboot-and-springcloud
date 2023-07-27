@@ -1,22 +1,28 @@
 package com.spring.microservices.currencyexchange.request;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.math.BigDecimal;
 
+@Entity
 public class CurrencyExchange {
 
+    @Id
     private Long id;
-    private String from;
-    private String to;
+
+    private String fromCurrency;
+    private String toCurrency;
     private BigDecimal conversionMultiple;
 
     private String environment;
 
     public CurrencyExchange(){}
 
-    public CurrencyExchange(Long id, String from, String to, BigDecimal conversionMultiple) {
+    public CurrencyExchange(Long id, String fromCurrency, String toCurrency, BigDecimal conversionMultiple) {
         this.id = id;
-        this.from = from;
-        this.to = to;
+        this.fromCurrency = fromCurrency;
+        this.toCurrency = toCurrency;
         this.conversionMultiple = conversionMultiple;
     }
 
@@ -28,20 +34,20 @@ public class CurrencyExchange {
         this.id = id;
     }
 
-    public String getFrom() {
-        return from;
+    public String getFromCurrency() {
+        return fromCurrency;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFromCurrency(String fromCurrency) {
+        this.fromCurrency = fromCurrency;
     }
 
-    public String getTo() {
-        return to;
+    public String getToCurrency() {
+        return toCurrency;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setToCurrency(String toCurrency) {
+        this.toCurrency = toCurrency;
     }
 
     public BigDecimal getConversionMultiple() {
