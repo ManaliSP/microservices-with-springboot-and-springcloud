@@ -1,6 +1,8 @@
 package com.spring.microservices.currencyconversion.controller;
 
+import com.spring.microservices.currencyconversion.config.CurrencyExchangeProxy;
 import com.spring.microservices.currencyconversion.request.CurrencyConversion;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,9 @@ import java.util.HashMap;
 
 @RestController
 public class CurrencyConversionController {
+
+    @Autowired
+    private CurrencyExchangeProxy currencyExchangeProxy;
 
     @GetMapping("/currency-conversion/from/{fromCurrency}/to/{toCurrency}/quantity/{quantity}")
     public CurrencyConversion calculateCurrencyConversion(@PathVariable String fromCurrency,
@@ -34,6 +39,23 @@ public class CurrencyConversionController {
                 currencyConversion.getConversionMultiple(),
                 quantity,
                 quantity.multiply(currencyConversion.getConversionMultiple()),
-                currencyConversion.getEnvironment());
+                currencyConversion.getEnvironment() + " " + " rest template");
+    }
+
+    @GetMapping("/currency-conversion-feign/from/{fromCurrency}/to/{toCurrency}/quantity/{quantity}")
+    public CurrencyConversion calculateCurrencyConversionFeign(@PathVariable String fromCurrency,
+                                                          @PathVariable String toCurrency,
+                                                          @PathVariable BigDecimal quantity){
+
+        CurrencyConversion currencyConversion = currencyExchangeProxy.retrieveExchangeValue(fromCurrency, toCurrency);
+
+        return new CurrencyConversion(
+                currencyConversion.getId(),
+                fromCurrency,
+                toCurrency,
+                currencyConversion.getConversionMultiple(),
+                quantity,
+                quantity.multiply(currencyConversion.getConversionMultiple()),
+                currencyConversion.getEnvironment() + " " + "feign");
     }
 }
